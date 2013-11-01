@@ -32,7 +32,10 @@ package sssplayer.display {
 			this.updateParts();
 		}
 
-		private var parts:Vector.<SSSPartPlayer>;
+		private var _partPlayers:Vector.<SSSPartPlayer>;
+		public function get partPlayers():Vector.<SSSPartPlayer> {
+			return this._partPlayers.concat();
+		}
 
 		private var _isPlaying:Boolean = false;
 		public function get isPlaying():Boolean {
@@ -75,7 +78,7 @@ package sssplayer.display {
 		}
 
 		public function set color(value:uint):void {
-			for each (var partPlayer:SSSPartPlayer in this.parts) {
+			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
 				partPlayer.color = value;
 			}
 		}
@@ -123,21 +126,21 @@ package sssplayer.display {
 
 		private function prepareChildren():void {
 			this.removeChildren();
-			this.parts = new Vector.<SSSPartPlayer>();
+			this._partPlayers = new Vector.<SSSPartPlayer>();
 			for each (var part:SSSPart in this.model.parts) {
 				var partAnime:SSSPartAnime = this._anime.partAnimes[part.name];
 				var parentPartPlayer:SSSPartPlayer = null;
 				if (part.parentIndex > -1) {
-					parentPartPlayer = this.parts[part.parentIndex];
+					parentPartPlayer = this._partPlayers[part.parentIndex];
 				}
 				var partPlayer:SSSPartPlayer = new SSSPartPlayer(this.project, this.model, part, partAnime, parentPartPlayer);
 				this.addChild(partPlayer);
-				this.parts.push(partPlayer);
+				this._partPlayers.push(partPlayer);
 			}
 		}
 
 		private function updateParts():void {
-			for each (var partPlayer:SSSPartPlayer in this.parts) {
+			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
 				partPlayer.currentFrame = this._currentFrame;
 			}
 			if (this._withFlatten) {
@@ -150,7 +153,7 @@ package sssplayer.display {
 			if (!hitObject) {
 				return null;
 			}
-			for each (var partPlayer:SSSPartPlayer in this.parts) {
+			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
 				if (hitObject.parent == partPlayer) {
 					return partPlayer;
 				}
@@ -162,5 +165,6 @@ package sssplayer.display {
 			var partPlayer:SSSPartPlayer = this.partPlayerAt(x, y);
 			return partPlayer ? partPlayer.name : null;
 		}
+
 	}
 }
