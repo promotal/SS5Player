@@ -16,7 +16,20 @@ package sssplayer.data {
 			}
 			this._attributes = {};
 			for each (var attribute:XML in this.xml.attributes.attribute) {
-				this._attributes[attribute.@tag] = SSSAttribute.fromXML(attribute);
+				var attributeTag:String = String(attribute.@tag);
+				this._attributes[attributeTag] = SSSAttribute.fromXML(attribute);
+				switch (attributeTag) {
+					case "CELL":
+					case "HIDE":
+					case "POSX":
+					case "POSY":
+					case "ROTZ":
+					case "SCLX":
+					case "SCLY":
+						break;
+					default:
+						trace("SSSPartAnime.attributes(): Attribute not supported:", attributeTag);
+				}
 			}
 			return this._attributes;
 		}
