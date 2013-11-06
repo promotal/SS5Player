@@ -26,6 +26,7 @@ package sssplayer.data {
 					case "ROTZ":
 					case "SCLX":
 					case "SCLY":
+					case "ALPH":
 						break;
 					default:
 						trace("SSSPartAnime.attributes(): Attribute not supported:", attributeTag);
