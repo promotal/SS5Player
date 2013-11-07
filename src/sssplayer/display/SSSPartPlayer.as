@@ -53,6 +53,10 @@ package sssplayer.display {
 			}
 		}
 
+		public function get cellName():String {
+			return this._cell ? this._cell.name : null;
+		}
+
 		private var _texture:Texture;
 		private function set texture(value:Texture):void {
 			this._texture = value;
