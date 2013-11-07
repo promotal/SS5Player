@@ -86,7 +86,6 @@ package sssplayer.display {
 		public function SSSPlayer(project:SSSProject) {
 			super();
 			this.project = project;
-			this.touchable = false;
 		}
 
 		public function setAnime(name:String):SSSPlayer {
@@ -148,8 +147,11 @@ package sssplayer.display {
 			}
 		}
 
-		public function partPlayerAt(x:Number, y:Number):SSSPartPlayer {
-			var hitObject:DisplayObject = this.hitTest(new Point(x, y), false);
+		public function partPlayerAt(x:Number, y:Number, forTouch:Boolean = false):SSSPartPlayer {
+			var touchable:Boolean = this.touchable;
+			this.touchable = true;
+			var hitObject:DisplayObject = this.hitTest(new Point(x, y), forTouch);
+			this.touchable = touchable;
 			if (!hitObject) {
 				return null;
 			}
@@ -161,8 +163,8 @@ package sssplayer.display {
 			return null;
 		}
 
-		public function partNameAt(x:Number, y:Number):String {
-			var partPlayer:SSSPartPlayer = this.partPlayerAt(x, y);
+		public function partNameAt(x:Number, y:Number, forTouch:Boolean = false):String {
+			var partPlayer:SSSPartPlayer = this.partPlayerAt(x, y, forTouch);
 			return partPlayer ? partPlayer.name : null;
 		}
 
