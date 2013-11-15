@@ -44,10 +44,6 @@ package jp.promotal.sssplayer.data {
 		}
 
 		public function valueAt(time:Number):String {
-			if (false && this._frames) {
-				var frame:SSSFrame = this._frames[time] || this._frames[this._frames.length - 1];
-				return frame ? frame.value : "";
-			}
 			var prevKeyFrame:SSSKeyFrame = null;
 			var nextKeyFrame:SSSKeyFrame = null;
 			for each (var keyFrame:SSSKeyFrame in this.keyFrames) {
