@@ -1,4 +1,4 @@
-package sssplayer.net {
+package jp.promotal.sssplayer.net {
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -9,7 +9,7 @@ package sssplayer.net {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
-	import sssplayer.data.SSSProject;
+	import jp.promotal.sssplayer.data.SSSProject;
 
 	import starling.textures.Texture;
 

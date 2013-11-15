@@ -1,4 +1,4 @@
-package sssplayer.data {
+package jp.promotal.sssplayer.data {
 
 	import flash.geom.Rectangle;
 

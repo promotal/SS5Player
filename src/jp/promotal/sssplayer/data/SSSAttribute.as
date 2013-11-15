@@ -1,6 +1,6 @@
-package sssplayer.data {
+package jp.promotal.sssplayer.data {
 
-	import sssplayer.utils.SSSInterpolation;
+	import jp.promotal.sssplayer.utils.SSSInterpolation;
 
 	public class SSSAttribute {
 

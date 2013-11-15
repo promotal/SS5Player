@@ -1,13 +1,13 @@
-package sssplayer.display {
+package jp.promotal.sssplayer.display {
 
 	import flash.geom.Matrix;
 
-	import sssplayer.data.SSSCell;
-	import sssplayer.data.SSSModel;
-	import sssplayer.data.SSSPartAnime;
-	import sssplayer.data.SSSProject;
-	import sssplayer.data.SSSPart;
-	import sssplayer.utils.SSSColor;
+	import jp.promotal.sssplayer.data.SSSCell;
+	import jp.promotal.sssplayer.data.SSSModel;
+	import jp.promotal.sssplayer.data.SSSPartAnime;
+	import jp.promotal.sssplayer.data.SSSProject;
+	import jp.promotal.sssplayer.data.SSSPart;
+	import jp.promotal.sssplayer.utils.SSSColor;
 
 	import starling.display.Image;
 	import starling.display.Sprite;

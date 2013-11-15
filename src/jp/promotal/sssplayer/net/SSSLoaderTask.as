@@ -1,4 +1,4 @@
-package sssplayer.net {
+package jp.promotal.sssplayer.net {
 
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;

@@ -1,4 +1,4 @@
-package sssplayer.utils {
+package jp.promotal.sssplayer.utils {
 
 	public class SSSInterpolation {
 		public function SSSInterpolation() {

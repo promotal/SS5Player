@@ -1,12 +1,12 @@
-package sssplayer.display {
+package jp.promotal.sssplayer.display {
 
 	import flash.geom.Point;
 
-	import sssplayer.data.SSSModel;
-	import sssplayer.data.SSSPartAnime;
-	import sssplayer.data.SSSProject;
-	import sssplayer.data.SSSAnime;
-	import sssplayer.data.SSSPart;
+	import jp.promotal.sssplayer.data.SSSModel;
+	import jp.promotal.sssplayer.data.SSSPartAnime;
+	import jp.promotal.sssplayer.data.SSSProject;
+	import jp.promotal.sssplayer.data.SSSAnime;
+	import jp.promotal.sssplayer.data.SSSPart;
 
 	import starling.display.DisplayObject;
 
