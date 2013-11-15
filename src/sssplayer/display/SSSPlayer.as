@@ -121,6 +121,7 @@ package sssplayer.display {
 				}
 				this.dispatchEventWith(Event.COMPLETE);
 			}
+			this.updateParts();
 		}
 
 		private function prepareChildren():void {
