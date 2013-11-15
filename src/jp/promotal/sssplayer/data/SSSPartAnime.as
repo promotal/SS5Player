@@ -2,11 +2,11 @@ package jp.promotal.sssplayer.data {
 
 	public class SSSPartAnime {
 
-		private var xml:XML;
+		private var _xml:XML;
 
 		private var _partName:String;
 		public function get partName():String {
-			return this._partName ||= xml.partName;
+			return this._partName;
 		}
 
 		private var _attributes:Object;
@@ -14,10 +14,26 @@ package jp.promotal.sssplayer.data {
 			if (this._attributes) {
 				return this._attributes;
 			}
+			return this._attributes;
+		}
+		public function attribute(tag:String):SSSAttribute {
+			return this.attributes[tag] ||= SSSAttribute.empty();
+		}
+
+		public function SSSPartAnime() {
+			super();
 			this._attributes = {};
-			for each (var attribute:XML in this.xml.attributes.attribute) {
+		}
+
+		public static function fromXML(xml:XML):SSSPartAnime {
+			var result:SSSPartAnime = new SSSPartAnime();
+			if (SSSProject.DEBUG) {
+				result._xml = xml;
+			}
+			result._partName = xml.partName;
+			for each (var attribute:XML in xml.attributes.attribute) {
 				var attributeTag:String = String(attribute.@tag);
-				this._attributes[attributeTag] = SSSAttribute.fromXML(attribute);
+				result._attributes[attributeTag] = SSSAttribute.fromXML(attribute);
 				switch (attributeTag) {
 					case "CELL":
 					case "HIDE":
@@ -32,20 +48,6 @@ package jp.promotal.sssplayer.data {
 						trace("SSSPartAnime.attributes(): Attribute not supported:", attributeTag);
 				}
 			}
-			return this._attributes;
-		}
-
-		public function attribute(tag:String):SSSAttribute {
-			return this.attributes[tag] ||= SSSAttribute.empty();
-		}
-
-		public function SSSPartAnime() {
-			super();
-		}
-
-		public static function fromXML(xml:XML):SSSPartAnime {
-			var result:SSSPartAnime = new SSSPartAnime();
-			result.xml = xml;
 			return result;
 		}
 	}

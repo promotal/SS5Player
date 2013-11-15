@@ -4,18 +4,10 @@ package jp.promotal.sssplayer.data {
 
 	public class SSSAttribute {
 
-		private var xml:XML;
+		private var _xml:XML;
 
 		private var _keyFrames:Array;
 		public function get keyFrames():Array {
-			if (this._keyFrames) {
-				return this._keyFrames;
-			}
-			this._keyFrames = [];
-			for each (var key:XML in this.xml.key) {
-				var keyFrame:SSSKeyFrame = SSSKeyFrame.fromXML(key);
-				this._keyFrames.push(keyFrame);
-			}
 			return this._keyFrames;
 		}
 
@@ -80,6 +72,7 @@ package jp.promotal.sssplayer.data {
 
 		public function SSSAttribute() {
 			super();
+			this._keyFrames = [];
 		}
 
 		public static function empty():SSSAttribute {
@@ -88,7 +81,13 @@ package jp.promotal.sssplayer.data {
 
 		public static function fromXML(xml:XML):SSSAttribute {
 			var result:SSSAttribute = new SSSAttribute();
-			result.xml = xml;
+			if (SSSProject.DEBUG) {
+				result._xml = xml;
+			}
+			for each (var key:XML in xml.key) {
+				var keyFrame:SSSKeyFrame = SSSKeyFrame.fromXML(key);
+				result._keyFrames.push(keyFrame);
+			}
 			return result;
 		}
 	}

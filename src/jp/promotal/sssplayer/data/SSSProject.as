@@ -4,6 +4,8 @@ package jp.promotal.sssplayer.data {
 
 	public class SSSProject {
 
+		public static const DEBUG:Boolean = false;
+
 		private var models:Object;
 		public function model(name:String):SSSAnime {
 			return this.models[name];
@@ -30,11 +32,6 @@ package jp.promotal.sssplayer.data {
 		private var cells:Object;
 		public function cell(name:String):SSSCell {
 			return this.cells[name];
-		}
-
-		private var xmls:Object;
-		public function xml(name:String):XML {
-			return this.xmls[name];
 		}
 
 		private var textures:Vector.<Texture>;

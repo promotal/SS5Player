@@ -2,26 +2,26 @@ package jp.promotal.sssplayer.data {
 
 	public class SSSPart {
 
-		private var xml:XML;
+		private var _xml:XML;
 
 		private var _name:String;
 		public function get name():String {
-			return this._name ||= xml.name;
+			return this._name;
 		}
 
 		private var _type:String;
 		public function get type():String {
-			return this._type ||= xml.type;
+			return this._type;
 		}
 
 		private var _parentIndex:int;
 		public function get parentIndex():int {
-			return this._parentIndex ||= xml.parentIndex;
+			return this._parentIndex;
 		}
 
 		private var _show:int;
 		public function get show():int {
-			return this._show ||= xml.show;
+			return this._show;
 		}
 
 		public function SSSPart() {
@@ -30,7 +30,13 @@ package jp.promotal.sssplayer.data {
 
 		public static function fromXML(xml:XML):SSSPart {
 			var result:SSSPart = new SSSPart();
-			result.xml = xml;
+			if (SSSProject.DEBUG) {
+				result._xml = xml;
+			}
+			result._name = xml.name;
+			result._type = xml.type;
+			result._parentIndex = xml.parentIndex;
+			result._show = xml.show;
 			return result;
 		}
 	}
