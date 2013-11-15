@@ -15,6 +15,8 @@ package sssplayer.display {
 
 	public class SSSPlayer extends Sprite {
 
+		public static const VERSION:String = "0.0.1";
+
 		private var project:SSSProject;
 
 		private var model:SSSModel;
