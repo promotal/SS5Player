@@ -1,6 +1,6 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	public class SSSFrame {
+	public class SSFrame {
 
 		public function get time():int {
 			return 0;
@@ -18,7 +18,7 @@ package jp.promotal.sssplayer.data {
 			this._value = value;
 		}
 
-		public function SSSFrame() {
+		public function SSFrame() {
 			super();
 		}
 	}

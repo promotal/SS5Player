@@ -1,6 +1,6 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	public class SSSAnime {
+	public class SSAnime {
 
 		private var _xml:XML;
 
@@ -24,21 +24,21 @@ package jp.promotal.sssplayer.data {
 			return this._partAnimes;
 		}
 
-		public function SSSAnime() {
+		public function SSAnime() {
 			super();
 			this._partAnimes = {};
 		}
 
-		public static function fromXML(xml:XML):SSSAnime {
-			var result:SSSAnime = new SSSAnime();
-			if (SSSProject.DEBUG) {
+		public static function fromXML(xml:XML):SSAnime {
+			var result:SSAnime = new SSAnime();
+			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
 			result._name = xml.name;
 			result._frameCount = xml.settings.frameCount;
 			result._fps = xml.settings.fps;
 			for each (var partAnimeXML:XML in xml.partAnimes.partAnime) {
-				var partAnime:SSSPartAnime = SSSPartAnime.fromXML(partAnimeXML);
+				var partAnime:SSPartAnime = SSPartAnime.fromXML(partAnimeXML);
 				result._partAnimes[partAnime.partName] = partAnime;
 			}
 			return result;

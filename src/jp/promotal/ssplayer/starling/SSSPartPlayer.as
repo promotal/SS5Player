@@ -1,13 +1,13 @@
-package jp.promotal.sssplayer.display {
+package jp.promotal.ssplayer.starling {
 
 	import flash.geom.Matrix;
 
-	import jp.promotal.sssplayer.data.SSSCell;
-	import jp.promotal.sssplayer.data.SSSModel;
-	import jp.promotal.sssplayer.data.SSSPartAnime;
-	import jp.promotal.sssplayer.data.SSSProject;
-	import jp.promotal.sssplayer.data.SSSPart;
-	import jp.promotal.sssplayer.utils.SSSColor;
+	import jp.promotal.ssplayer.data.SSCell;
+	import jp.promotal.ssplayer.data.SSModel;
+	import jp.promotal.ssplayer.data.SSPartAnime;
+	import jp.promotal.ssplayer.data.SSProject;
+	import jp.promotal.ssplayer.data.SSPart;
+	import jp.promotal.ssplayer.utils.SSColor;
 
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -15,15 +15,15 @@ package jp.promotal.sssplayer.display {
 
 	public class SSSPartPlayer extends Sprite {
 
-		private var project:SSSProject;
+		private var project:SSProject;
 
-		private var model:SSSModel;
+		private var model:SSModel;
 
 		private var parentPartPlayer:SSSPartPlayer;
 
 		private var image:Image;
 
-		private var _color:SSSColor = new SSSColor(0xffffffff);
+		private var _color:SSColor = new SSColor(0xffffffff);
 		public function get color():uint {
 			return this._color.value;
 		}
@@ -31,18 +31,18 @@ package jp.promotal.sssplayer.display {
 			this._color.value = value;
 		}
 
-		private var _part:SSSPart;
-		public function get part():SSSPart {
+		private var _part:SSPart;
+		public function get part():SSPart {
 			return _part;
 		}
 
-		private var partAnime:SSSPartAnime;
+		private var partAnime:SSPartAnime;
 
-		private var _cell:SSSCell;
-		public function get cell():SSSCell {
+		private var _cell:SSCell;
+		public function get cell():SSCell {
 			return this._cell;
 		}
-		public function set cell(value:SSSCell):void {
+		public function set cell(value:SSCell):void {
 			this._cell = value;
 			if (value) {
 				this.texture = value.texture;
@@ -77,7 +77,7 @@ package jp.promotal.sssplayer.display {
 			return this._part.name;
 		}
 
-		public function SSSPartPlayer(project:SSSProject, model:SSSModel, part:SSSPart, partAnime:SSSPartAnime, parentPartPlayer:SSSPartPlayer) {
+		public function SSSPartPlayer(project:SSProject, model:SSModel, part:SSPart, partAnime:SSPartAnime, parentPartPlayer:SSSPartPlayer) {
 			super();
 			this.project = project;
 			this.model = model;

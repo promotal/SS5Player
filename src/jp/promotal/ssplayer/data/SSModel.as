@@ -1,11 +1,11 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	public class SSSModel {
+	public class SSModel {
 
 		private var _xml:XML;
 
-		private var _parts:Vector.<SSSPart>;
-		public function get parts():Vector.<SSSPart> {
+		private var _parts:Vector.<SSPart>;
+		public function get parts():Vector.<SSPart> {
 			return this._parts;
 		}
 
@@ -13,7 +13,7 @@ package jp.promotal.sssplayer.data {
 		public function get animes():Object {
 			return this._animes;
 		}
-		public function anime(name:String):SSSAnime {
+		public function anime(name:String):SSAnime {
 			return this._animes[name];
 		}
 
@@ -25,24 +25,24 @@ package jp.promotal.sssplayer.data {
 			return this._cellmapNames[index];
 		}
 
-		public function SSSModel() {
+		public function SSModel() {
 			super();
-			this._parts = new Vector.<SSSPart>();
+			this._parts = new Vector.<SSPart>();
 			this._animes = {};
 			this._cellmapNames = [];
 		}
 
-		public static function fromXML(xml:XML):SSSModel {
-			var result:SSSModel = new SSSModel();
-			if (SSSProject.DEBUG) {
+		public static function fromXML(xml:XML):SSModel {
+			var result:SSModel = new SSModel();
+			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
 			for each (var partXML:XML in xml.Model.partList.value) {
-				var part:SSSPart = SSSPart.fromXML(partXML);
+				var part:SSPart = SSPart.fromXML(partXML);
 				result._parts.push(part);
 			}
 			for each (var animeXML:XML in xml.animeList.anime) {
-				var anime:SSSAnime = SSSAnime.fromXML(animeXML);
+				var anime:SSAnime = SSAnime.fromXML(animeXML);
 				result._animes[anime.name] = anime;
 			}
 			for each (var cellmapName:XML in xml.cellmapNames.value) {

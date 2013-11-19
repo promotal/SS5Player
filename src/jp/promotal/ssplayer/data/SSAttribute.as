@@ -1,8 +1,8 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	import jp.promotal.sssplayer.utils.SSSInterpolation;
+	import jp.promotal.ssplayer.utils.SSInterpolation;
 
-	public class SSSAttribute {
+	public class SSAttribute {
 
 		private var _xml:XML;
 
@@ -17,13 +17,13 @@ package jp.promotal.sssplayer.data {
 				return this._frames;
 			}
 			this._frames = [];
-			for each (var keyFrame:SSSKeyFrame in this.keyFrames) {
+			for each (var keyFrame:SSKeyFrame in this.keyFrames) {
 				this._frames[keyFrame.time] = keyFrame;
 			}
 			for (var i:int = 0; i < this._frames.length; i++) {
-				var startFrame:SSSFrame = this._frames[i];
+				var startFrame:SSFrame = this._frames[i];
 				if (startFrame) {
-					var endFrame:SSSFrame = null;
+					var endFrame:SSFrame = null;
 					for (var j:int = i + 1; j < this._frames.length; j++) {
 						if (this._frames[j]) {
 							endFrame = this._frames[j];
@@ -32,8 +32,8 @@ package jp.promotal.sssplayer.data {
 					}
 					if (endFrame) {
 						for (var k:int = i + 1; k < j; k++) {
-							var frame:SSSFrame = new SSSFrame();
-							frame.value = SSSInterpolation.interpolate(startFrame.ipType, i, j, k, startFrame.value, endFrame.value);
+							var frame:SSFrame = new SSFrame();
+							frame.value = SSInterpolation.interpolate(startFrame.ipType, i, j, k, startFrame.value, endFrame.value);
 							this._frames[k] = frame;
 						}
 						i = j - 1;
@@ -44,9 +44,9 @@ package jp.promotal.sssplayer.data {
 		}
 
 		public function valueAt(time:Number):String {
-			var prevKeyFrame:SSSKeyFrame = null;
-			var nextKeyFrame:SSSKeyFrame = null;
-			for each (var keyFrame:SSSKeyFrame in this.keyFrames) {
+			var prevKeyFrame:SSKeyFrame = null;
+			var nextKeyFrame:SSKeyFrame = null;
+			for each (var keyFrame:SSKeyFrame in this.keyFrames) {
 				if (keyFrame.time <= time) {
 					if (!prevKeyFrame || keyFrame.time > prevKeyFrame.time) {
 						prevKeyFrame = keyFrame;
@@ -63,25 +63,25 @@ package jp.promotal.sssplayer.data {
 			if (!nextKeyFrame) {
 				return prevKeyFrame.value;
 			}
-			return SSSInterpolation.interpolate(prevKeyFrame.ipType, prevKeyFrame.time, nextKeyFrame.time, time, prevKeyFrame.value, nextKeyFrame.value);
+			return SSInterpolation.interpolate(prevKeyFrame.ipType, prevKeyFrame.time, nextKeyFrame.time, time, prevKeyFrame.value, nextKeyFrame.value);
 		}
 
-		public function SSSAttribute() {
+		public function SSAttribute() {
 			super();
 			this._keyFrames = [];
 		}
 
-		public static function empty():SSSAttribute {
-			return SSSAttribute.fromXML(<root />);
+		public static function empty():SSAttribute {
+			return SSAttribute.fromXML(<root />);
 		}
 
-		public static function fromXML(xml:XML):SSSAttribute {
-			var result:SSSAttribute = new SSSAttribute();
-			if (SSSProject.DEBUG) {
+		public static function fromXML(xml:XML):SSAttribute {
+			var result:SSAttribute = new SSAttribute();
+			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
 			for each (var key:XML in xml.key) {
-				var keyFrame:SSSKeyFrame = SSSKeyFrame.fromXML(key);
+				var keyFrame:SSKeyFrame = SSKeyFrame.fromXML(key);
 				result._keyFrames.push(keyFrame);
 			}
 			return result;

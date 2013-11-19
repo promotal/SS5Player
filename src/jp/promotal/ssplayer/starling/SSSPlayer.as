@@ -1,12 +1,12 @@
-package jp.promotal.sssplayer.display {
+package jp.promotal.ssplayer.starling {
 
 	import flash.geom.Point;
 
-	import jp.promotal.sssplayer.data.SSSModel;
-	import jp.promotal.sssplayer.data.SSSPartAnime;
-	import jp.promotal.sssplayer.data.SSSProject;
-	import jp.promotal.sssplayer.data.SSSAnime;
-	import jp.promotal.sssplayer.data.SSSPart;
+	import jp.promotal.ssplayer.data.SSModel;
+	import jp.promotal.ssplayer.data.SSPartAnime;
+	import jp.promotal.ssplayer.data.SSProject;
+	import jp.promotal.ssplayer.data.SSAnime;
+	import jp.promotal.ssplayer.data.SSPart;
 
 	import starling.display.DisplayObject;
 
@@ -17,11 +17,11 @@ package jp.promotal.sssplayer.display {
 
 		public static const VERSION:String = "0.0.1";
 
-		private var project:SSSProject;
+		private var project:SSProject;
 
-		private var model:SSSModel;
-		private var _anime:SSSAnime;
-		public function get anime():SSSAnime {
+		private var model:SSModel;
+		private var _anime:SSAnime;
+		public function get anime():SSAnime {
 			return this._anime;
 		}
 
@@ -85,7 +85,7 @@ package jp.promotal.sssplayer.display {
 			}
 		}
 
-		public function SSSPlayer(project:SSSProject) {
+		public function SSSPlayer(project:SSProject) {
 			super();
 			this.project = project;
 		}
@@ -129,8 +129,8 @@ package jp.promotal.sssplayer.display {
 		private function prepareChildren():void {
 			this.removeChildren();
 			this._partPlayers = new Vector.<SSSPartPlayer>();
-			for each (var part:SSSPart in this.model.parts) {
-				var partAnime:SSSPartAnime = this._anime.partAnimes[part.name];
+			for each (var part:SSPart in this.model.parts) {
+				var partAnime:SSPartAnime = this._anime.partAnimes[part.name];
 				var parentPartPlayer:SSSPartPlayer = null;
 				if (part.parentIndex > -1) {
 					parentPartPlayer = this._partPlayers[part.parentIndex];

@@ -1,6 +1,6 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	public class SSSKeyFrame extends SSSFrame {
+	public class SSKeyFrame extends SSFrame {
 
 		private var _xml:XML;
 
@@ -14,13 +14,13 @@ package jp.promotal.sssplayer.data {
 			return this._ipType;
 		}
 
-		public function SSSKeyFrame() {
+		public function SSKeyFrame() {
 			super();
 		}
 
-		public static function fromXML(xml:XML):SSSKeyFrame {
-			var result:SSSKeyFrame = new SSSKeyFrame();
-			if (SSSProject.DEBUG) {
+		public static function fromXML(xml:XML):SSKeyFrame {
+			var result:SSKeyFrame = new SSKeyFrame();
+			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
 			result._time = xml.@time;
@@ -28,7 +28,7 @@ package jp.promotal.sssplayer.data {
 
 			var value:String;
 			value = String(xml.value.text()).replace(/\s/g, "");
-			value ||= SSSCell.globalCellName(xml.value.mapId.text(), xml.value.name.text());
+			value ||= SSCell.globalCellName(xml.value.mapId.text(), xml.value.name.text());
 			result.value = value;
 
 			return result;

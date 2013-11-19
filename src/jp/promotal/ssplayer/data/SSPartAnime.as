@@ -1,6 +1,6 @@
-package jp.promotal.sssplayer.data {
+package jp.promotal.ssplayer.data {
 
-	public class SSSPartAnime {
+	public class SSPartAnime {
 
 		private var _xml:XML;
 
@@ -16,24 +16,24 @@ package jp.promotal.sssplayer.data {
 			}
 			return this._attributes;
 		}
-		public function attribute(tag:String):SSSAttribute {
-			return this.attributes[tag] ||= SSSAttribute.empty();
+		public function attribute(tag:String):SSAttribute {
+			return this.attributes[tag] ||= SSAttribute.empty();
 		}
 
-		public function SSSPartAnime() {
+		public function SSPartAnime() {
 			super();
 			this._attributes = {};
 		}
 
-		public static function fromXML(xml:XML):SSSPartAnime {
-			var result:SSSPartAnime = new SSSPartAnime();
-			if (SSSProject.DEBUG) {
+		public static function fromXML(xml:XML):SSPartAnime {
+			var result:SSPartAnime = new SSPartAnime();
+			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
 			result._partName = xml.partName;
 			for each (var attribute:XML in xml.attributes.attribute) {
 				var attributeTag:String = String(attribute.@tag);
-				result._attributes[attributeTag] = SSSAttribute.fromXML(attribute);
+				result._attributes[attributeTag] = SSAttribute.fromXML(attribute);
 				switch (attributeTag) {
 					case "CELL":
 					case "HIDE":
