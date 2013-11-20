@@ -97,20 +97,20 @@ package jp.promotal.ssplayer.starling {
 					this.cell = this.part.show != 0 ? this.project.cell(cellName) : null;
 					var matrix:Matrix = new Matrix();
 					matrix.scale(
-						parseFloat(this.partAnime.attribute("SCLX").valueAt(value) || "1"),
-						parseFloat(this.partAnime.attribute("SCLY").valueAt(value) || "1")
+						this.partAnime.attribute("SCLX").valueAt(value) || 1,
+						this.partAnime.attribute("SCLY").valueAt(value) || 1
 					);
-					matrix.rotate(-(parseFloat(this.partAnime.attribute("ROTZ").valueAt(value)) || 0) / 180 * Math.PI);
+					matrix.rotate(-(this.partAnime.attribute("ROTZ").valueAt(value) || 0) / 180 * Math.PI);
 					matrix.translate(
-						(parseFloat(this.partAnime.attribute("POSX").valueAt(value))) || 0,
-						-(parseFloat(this.partAnime.attribute("POSY").valueAt(value))) || 0
+						this.partAnime.attribute("POSX").valueAt(value) || 0,
+						-this.partAnime.attribute("POSY").valueAt(value) || 0
 					);
 					if (this.parentPartPlayer) {
 						matrix.concat(this.parentPartPlayer.transformationMatrix);
 					}
 					if (this.image) {
-						this.image.visible = true;//String(this.partAnime.attribute("HIDE").valueAt(value)) != "1";
-						var alpha:Number = parseFloat(this.partAnime.attribute("ALPH").valueAt(value) || "1");
+						this.image.visible = true;//String(this.partAnime.attribute("HIDE").valueAt(value)) != 1;
+						var alpha:Number = this.partAnime.attribute("ALPH").valueAt(value) || 1;
 						this.image.alpha = alpha;
 						this.image.color = this._color.value;
 					}

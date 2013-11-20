@@ -43,7 +43,7 @@ package jp.promotal.ssplayer.data {
 			return this._frames;
 		}
 
-		public function valueAt(time:Number):String {
+		public function valueAt(time:Number):* {
 			var prevKeyFrame:SSKeyFrame = null;
 			var nextKeyFrame:SSKeyFrame = null;
 			for each (var keyFrame:SSKeyFrame in this.keyFrames) {
