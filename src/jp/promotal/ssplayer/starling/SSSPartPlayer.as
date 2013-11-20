@@ -86,44 +86,35 @@ package jp.promotal.ssplayer.starling {
 			this.parentPartPlayer = parentPartPlayer;
 		}
 
-		public function set currentFrame(value:Number):void {
+		public function set currentFrame(time:Number):void {
 			if (!this.partAnime) {
 				return;
 			}
 			switch (this._part.type) {
 				case "normal":
-					var cellName:String = this.partAnime.attribute("CELL").valueAt(value);
+					var cellName:String = this.partAnime.attributeValueAt("CELL", time);
 					cellName = this.model.cellmapName(int(cellName.split("/")[0])) + "/" + cellName.split("/")[1];
 					this.cell = this.part.show != 0 ? this.project.cell(cellName) : null;
 					var matrix:Matrix = new Matrix();
 					matrix.scale(
-						this.partAnime.attribute("SCLX").valueAt(value) || 1,
-						this.partAnime.attribute("SCLY").valueAt(value) || 1
+						this.partAnime.attributeValueAt("SCLX", time),
+						this.partAnime.attributeValueAt("SCLY", time)
 					);
-					matrix.rotate(-(this.partAnime.attribute("ROTZ").valueAt(value) || 0) / 180 * Math.PI);
+					matrix.rotate(-this.partAnime.attributeValueAt("ROTZ", time) / 180 * Math.PI);
 					matrix.translate(
-						this.partAnime.attribute("POSX").valueAt(value) || 0,
-						-this.partAnime.attribute("POSY").valueAt(value) || 0
+						this.partAnime.attributeValueAt("POSX", time),
+						-this.partAnime.attributeValueAt("POSY", time)
 					);
 					if (this.parentPartPlayer) {
 						matrix.concat(this.parentPartPlayer.transformationMatrix);
 					}
 					if (this.image) {
-						this.image.visible = true;//String(this.partAnime.attribute("HIDE").valueAt(value)) != 1;
-						var alpha:Number = this.partAnime.attribute("ALPH").valueAt(value) || 1;
-						this.image.alpha = alpha;
+						this.image.visible = this.partAnime.attributeValueAt("HIDE", time) != 1;
+						this.image.alpha = this.partAnime.attributeValueAt("ALPH", time);
 						this.image.color = this._color.value;
 					}
 					this.transformationMatrix = matrix;
 					break;
-			}
-			if (false && this.image) {
-				trace([
-					this.partName,
-					this.cell.pivot,
-					this.cell.pivotX,
-					this.cell.pivotY
-				].join(","));
 			}
 		}
 	}

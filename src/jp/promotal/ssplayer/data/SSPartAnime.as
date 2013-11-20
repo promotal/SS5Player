@@ -11,13 +11,14 @@ package jp.promotal.ssplayer.data {
 
 		private var _attributes:Object;
 		public function get attributes():Object {
-			if (this._attributes) {
-				return this._attributes;
-			}
 			return this._attributes;
 		}
 		public function attribute(tag:String):SSAttribute {
-			return this.attributes[tag] ||= SSAttribute.empty();
+			return this._attributes[tag] ||= SSAttribute.empty(tag);
+		}
+
+		public function attributeValueAt(tag:String, time:Number):* {
+			return this.attribute(tag).valueAt(time);
 		}
 
 		public function SSPartAnime() {
@@ -31,22 +32,9 @@ package jp.promotal.ssplayer.data {
 				result._xml = xml;
 			}
 			result._partName = xml.partName;
-			for each (var attribute:XML in xml.attributes.attribute) {
-				var attributeTag:String = String(attribute.@tag);
-				result._attributes[attributeTag] = SSAttribute.fromXML(attribute);
-				switch (attributeTag) {
-					case "CELL":
-					case "HIDE":
-					case "POSX":
-					case "POSY":
-					case "ROTZ":
-					case "SCLX":
-					case "SCLY":
-					case "ALPH":
-						break;
-					default:
-						trace("SSSPartAnime.attributes(): Attribute not supported:", attributeTag);
-				}
+			for each (var attributeXML:XML in xml.attributes.attribute) {
+				var attribute:SSAttribute = SSAttribute.fromXML(attributeXML);
+				result._attributes[attribute.tag] = attribute;
 			}
 			return result;
 		}

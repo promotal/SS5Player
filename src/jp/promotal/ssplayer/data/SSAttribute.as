@@ -6,6 +6,41 @@ package jp.promotal.ssplayer.data {
 
 		private var _xml:XML;
 
+		private var _tag:String;
+		public function get tag():String {
+			return this._tag;
+		}
+		public function set tag(value:String):void {
+			this._tag = value;
+			if (defaultValue(value) === undefined) {
+				trace("SSAttribute.tag(): Attribute not supported:", value);
+			}
+		}
+
+		public static function defaultValue(tag:String):* {
+			switch (tag) {
+				case "CELL":
+					return null;
+				case "HIDE":
+					return 0;
+				case "POSX":
+					return 0;
+				case "POSY":
+					return 0;
+				case "ROTZ":
+					return 0;
+				case "SCLX":
+					return 1;
+				case "SCLY":
+					return 1;
+				case "ALPH":
+					return 1;
+				default:
+					return undefined;
+			}
+
+		}
+
 		private var _keyFrames:Array;
 		public function get keyFrames():Array {
 			return this._keyFrames;
@@ -58,7 +93,7 @@ package jp.promotal.ssplayer.data {
 				}
 			}
 			if (!prevKeyFrame) {
-				return nextKeyFrame ? nextKeyFrame.value : "";
+				return nextKeyFrame ? nextKeyFrame.value : defaultValue(this.tag);
 			}
 			if (!nextKeyFrame) {
 				return prevKeyFrame.value;
@@ -71,8 +106,10 @@ package jp.promotal.ssplayer.data {
 			this._keyFrames = [];
 		}
 
-		public static function empty():SSAttribute {
-			return SSAttribute.fromXML(<root />);
+		public static function empty(tag:String):SSAttribute {
+			var result:SSAttribute = new SSAttribute();
+			result.tag = tag;
+			return result;
 		}
 
 		public static function fromXML(xml:XML):SSAttribute {
@@ -80,6 +117,7 @@ package jp.promotal.ssplayer.data {
 			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
+			result.tag = xml.@tag;
 			for each (var key:XML in xml.key) {
 				var keyFrame:SSKeyFrame = SSKeyFrame.fromXML(key);
 				result._keyFrames.push(keyFrame);
