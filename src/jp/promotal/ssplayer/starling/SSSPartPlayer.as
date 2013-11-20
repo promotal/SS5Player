@@ -3,6 +3,7 @@ package jp.promotal.ssplayer.starling {
 	import flash.geom.Matrix;
 
 	import jp.promotal.ssplayer.data.SSCell;
+	import jp.promotal.ssplayer.data.SSCellName;
 	import jp.promotal.ssplayer.data.SSModel;
 	import jp.promotal.ssplayer.data.SSPartAnime;
 	import jp.promotal.ssplayer.data.SSProject;
@@ -92,28 +93,31 @@ package jp.promotal.ssplayer.starling {
 			}
 			switch (this._part.type) {
 				case "normal":
-					var cellName:String = this.partAnime.attributeValueAt("CELL", time);
-					cellName = this.model.cellmapName(int(cellName.split("/")[0])) + "/" + cellName.split("/")[1];
-					this.cell = this.part.show != 0 ? this.project.cell(cellName) : null;
-					var matrix:Matrix = new Matrix();
-					matrix.scale(
-						this.partAnime.attributeValueAt("SCLX", time),
-						this.partAnime.attributeValueAt("SCLY", time)
-					);
-					matrix.rotate(-this.partAnime.attributeValueAt("ROTZ", time) / 180 * Math.PI);
-					matrix.translate(
-						this.partAnime.attributeValueAt("POSX", time),
-						-this.partAnime.attributeValueAt("POSY", time)
-					);
-					if (this.parentPartPlayer) {
-						matrix.concat(this.parentPartPlayer.transformationMatrix);
+					if (this.part.show == 0) {
+						this.cell = null;
+					} else {
+						var cellName:SSCellName = this.partAnime.attributeValueAt("CELL", time);
+						this.cell = cellName.resolve(this.project, this.model);
+						var matrix:Matrix = new Matrix();
+						matrix.scale(
+							this.partAnime.attributeValueAt("SCLX", time),
+							this.partAnime.attributeValueAt("SCLY", time)
+						);
+						matrix.rotate(-this.partAnime.attributeValueAt("ROTZ", time) / 180 * Math.PI);
+						matrix.translate(
+							this.partAnime.attributeValueAt("POSX", time),
+							-this.partAnime.attributeValueAt("POSY", time)
+						);
+						if (this.parentPartPlayer) {
+							matrix.concat(this.parentPartPlayer.transformationMatrix);
+						}
+						if (this.image) {
+							this.image.visible = this.partAnime.attributeValueAt("HIDE", time) != 1;
+							this.image.alpha = this.partAnime.attributeValueAt("ALPH", time);
+							this.image.color = this._color.value;
+						}
+						this.transformationMatrix = matrix;
 					}
-					if (this.image) {
-						this.image.visible = this.partAnime.attributeValueAt("HIDE", time) != 1;
-						this.image.alpha = this.partAnime.attributeValueAt("ALPH", time);
-						this.image.color = this._color.value;
-					}
-					this.transformationMatrix = matrix;
 					break;
 			}
 		}

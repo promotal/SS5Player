@@ -16,13 +16,11 @@ package jp.promotal.ssplayer.data {
 			result.time = xml.@time;
 			result.ipType = xml.@ipType;
 
-			if (xml.value.elements().length() == 0) {
-				// primitive value (treat as Number)
-				result.value = parseFloat(String(xml.value.text()).replace(/\s/g, ""));
-			} else {
-				// complex value (treat as Hash)
-				result.value = SSCell.globalCellName(xml.value.mapId.text(), xml.value.name.text());
-			}
+			var value:XML = xml.value[0];
+			// treat as SSCellName if valid
+			result.value = SSCellName.fromXML(value);
+			// fall back for Number
+			result.value ||= parseFloat(String(value.text()).replace(/\s/g, ""));
 
 			return result;
 		}

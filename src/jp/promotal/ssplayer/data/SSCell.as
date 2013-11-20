@@ -52,9 +52,5 @@ package jp.promotal.ssplayer.data {
 			result._pivot = String(xml.pivot).split(" ");
 			return result;
 		}
-
-		public static function globalCellName(mapName:String, cellName:String):String {
-			return mapName + "/" + cellName;
-		}
 	}
 }

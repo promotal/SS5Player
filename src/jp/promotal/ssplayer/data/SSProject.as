@@ -29,16 +29,19 @@ package jp.promotal.ssplayer.data {
 			return null;
 		}
 
-		private var cells:Object;
-		public function cell(name:String):SSCell {
-			return this.cells[name];
+		private var cellmaps:Object;
+		private function cellmap(cellmapName:String):Object {
+			return this.cellmaps[cellmapName] ||= {};
+		}
+		public function cell(cellmapName:String, name:String):SSCell {
+			return this.cellmap(cellmapName)[name];
 		}
 
 		private var textures:Vector.<Texture>;
 		public function SSProject() {
 			super();
 			this.models = {};
-			this.cells = {};
+			this.cellmaps = {};
 			this.textures = new Vector.<Texture>();
 		}
 
@@ -50,10 +53,12 @@ package jp.promotal.ssplayer.data {
 
 		public function addCellMapXML(texture:Texture, xml:XML, name:String):SSProject {
 			this.textures.push(texture);
+			var cellmap:Object = {}
 			for each (var cellXML:XML in xml.cells.cell) {
 				var cell:SSCell = SSCell.fromXML(cellXML, texture);
-				this.cells[SSCell.globalCellName(name, cell.name)] = cell;
+				cellmap[cell.name] = cell;
 			}
+			this.cellmaps[name] = cellmap;
 			return this;
 		}
 
