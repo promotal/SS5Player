@@ -15,7 +15,7 @@ package jp.promotal.ssplayer.starling {
 
 	public class SSSPlayer extends Sprite {
 
-		public static const VERSION:String = "0.0.1";
+		public static const VERSION:String = "0.1.0";
 
 		private var project:SSProject;
 
