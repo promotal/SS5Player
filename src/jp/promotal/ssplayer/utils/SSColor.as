@@ -1,6 +1,6 @@
-package sssplayer.utils {
+package jp.promotal.ssplayer.utils {
 
-	public class SSSColor {
+	public class SSColor {
 
 		private var _alpha:Number;
 		public function get alpha():Number {
@@ -70,12 +70,12 @@ package sssplayer.utils {
 			this._blue  = ((value >>  0) & 0xff) / 255;
 		}
 
-		public function SSSColor(value:uint) {
+		public function SSColor(value:uint) {
 			this.value = value;
 		}
 
-		public function clone():SSSColor {
-			return new SSSColor(this.value);
+		public function clone():SSColor {
+			return new SSColor(this.value);
 		}
 
 	}

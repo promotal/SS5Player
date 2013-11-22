@@ -1,13 +1,13 @@
-package sssplayer.net {
+package jp.promotal.ssplayer.net {
 
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-	public class SSSLoaderTask {
+	public class SSLoaderTask {
 
 		private var afterFunc:Function;
 
-		private var waitsFor:Vector.<SSSLoaderTask>;
+		private var waitsFor:Vector.<SSLoaderTask>;
 
 		private var _isComplete:Boolean = false;
 		public function get isComplete():Boolean {
@@ -21,7 +21,7 @@ package sssplayer.net {
 
 		public function get ratio():Number {
 			var result:Number = this._isComplete ? 1 : 0;
-			for each (var task:SSSLoaderTask in this.waitsFor) {
+			for each (var task:SSLoaderTask in this.waitsFor) {
 				var taskRatio:Number = task.ratio;
 				result += taskRatio;
 			}
@@ -30,24 +30,24 @@ package sssplayer.net {
 
 		private var _event:*;
 
-		public function SSSLoaderTask(afterFunc:Function = null) {
+		public function SSLoaderTask(afterFunc:Function = null) {
 			super();
 			this.afterFunc = afterFunc;
-			this.waitsFor = new Vector.<SSSLoaderTask>();
+			this.waitsFor = new Vector.<SSLoaderTask>();
 		}
 
-		public function waitFor(task:SSSLoaderTask):void {
+		public function waitFor(task:SSLoaderTask):void {
 			this.waitsFor.push(task);
 		}
 
-		public function spawn(afterFunc:Function = null):SSSLoaderTask {
-			var task:SSSLoaderTask = new SSSLoaderTask(afterFunc);
+		public function spawn(afterFunc:Function = null):SSLoaderTask {
+			var task:SSLoaderTask = new SSLoaderTask(afterFunc);
 			this.waitsFor.push(task);
 			return task;
 		}
 
 		public function spawnEventListener(afterFunc:Function = null):Function {
-			var task:SSSLoaderTask = new SSSLoaderTask(afterFunc);
+			var task:SSLoaderTask = new SSLoaderTask(afterFunc);
 			this.waitsFor.push(task);
 			task._waitingEventListenerCount++;
 			return function(event:*/*Event*/):void {
@@ -58,7 +58,7 @@ package sssplayer.net {
 
 		public function tryRun():Boolean {
 			// run blocking task
-			for each (var task:SSSLoaderTask in this.waitsFor) {
+			for each (var task:SSLoaderTask in this.waitsFor) {
 				if (!task.isComplete) {
 					task.tryRun();
 					return false;

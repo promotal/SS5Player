@@ -1,34 +1,28 @@
-package sssplayer.data {
+package jp.promotal.ssplayer.data {
 
 	import flash.geom.Rectangle;
 
 	import starling.textures.Texture;
 
-	public class SSSCell {
+	public class SSCell {
 
 		public var texture:Texture;
 
-		private var xml:XML;
+		private var _xml:XML;
 
 		private var _name:String;
 		public function get name():String {
-			return this._name ||= xml.name;
+			return this._name;
 		}
 
 		private var _pictArea:Rectangle;
 		public function get pictArea():Rectangle {
-			if (this._pictArea) {
-				return this._pictArea;
-			}
-			var pos:Array = String(this.xml.pos).split(" ");
-			var size:Array = String(this.xml.size).split(" ");
-			this._pictArea = new Rectangle(pos[0], pos[1], size[0], size[1]);
 			return this._pictArea;
 		}
 
 		private var _pivot:Array;
 		public function get pivot():Array {
-			return this._pivot ||= String(this.xml.pivot).split(" ");
+			return this._pivot;
 		}
 
 		private var _pivotX:int;
@@ -41,19 +35,22 @@ package sssplayer.data {
 			return this._pivotY ||= (-Number(this.pivot[1]) + 0.5) * this.pictArea.height;
 		}
 
-		public function SSSCell() {
+		public function SSCell() {
 			super();
 		}
 
-		public static function fromXML(xml:XML, texture:Texture):SSSCell {
-			var result:SSSCell = new SSSCell();
-			result.xml = xml;
+		public static function fromXML(xml:XML, texture:Texture):SSCell {
+			var result:SSCell = new SSCell();
+			if (SSProject.DEBUG) {
+				result._xml = xml;
+			}
+			result._name = xml.name;
+			var pos:Array = String(xml.pos).split(" ");
+			var size:Array = String(xml.size).split(" ");
+			result._pictArea = new Rectangle(pos[0], pos[1], size[0], size[1]);
 			result.texture = Texture.fromTexture(texture, result.pictArea);
+			result._pivot = String(xml.pivot).split(" ");
 			return result;
-		}
-
-		public static function globalCellName(mapName:String, cellName:String):String {
-			return mapName + "/" + cellName;
 		}
 	}
 }

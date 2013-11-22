@@ -1,4 +1,4 @@
-package sssplayer.net {
+package jp.promotal.ssplayer.net {
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -9,21 +9,21 @@ package sssplayer.net {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
-	import sssplayer.data.SSSProject;
+	import jp.promotal.ssplayer.data.SSProject;
 
 	import starling.textures.Texture;
 
-	public class SSSProjectLoader {
+	public class SSProjectLoader {
 
-		public var project:SSSProject;
-		private var tasks:SSSLoaderTask;
+		public var project:SSProject;
+		private var tasks:SSLoaderTask;
 		private var directoryURL:String;
 
 		private function toURLRequest(fileName:String):URLRequest {
 			return new URLRequest(this.directoryURL + "/" + fileName);
 		}
 
-		public function SSSProjectLoader() {
+		public function SSProjectLoader() {
 			super();
 		}
 
@@ -32,17 +32,17 @@ package sssplayer.net {
 			if (this.project) {
 				return;
 			}
-			this.project = new SSSProject();
+			this.project = new SSProject();
 			this.directoryURL = request.url.slice(0, request.url.lastIndexOf("/"));
-			this.tasks = new SSSLoaderTask();
+			this.tasks = new SSLoaderTask();
 			this.loadProject(request);
 			this.tasks.start(onProgress);
 		}
 
 		private function loadProject(request:URLRequest):void {
 			trace("SSSProjectLoader.loadProject()");
-			var _this:SSSProjectLoader = this;
-			var task:SSSLoaderTask = this.tasks.spawn();
+			var _this:SSProjectLoader = this;
+			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadProjectComplete));
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! project読み込み失敗"));
@@ -61,8 +61,8 @@ package sssplayer.net {
 
 		private function loadAnimepack(name:String):void {
 			trace("SSSProjectLoader.loadAnimepack()");
-			var _this:SSSProjectLoader = this;
-			var task:SSSLoaderTask = this.tasks.spawn();
+			var _this:SSProjectLoader = this;
+			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadAnimepackComplete));
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! アニメーション読み込み失敗" + name));
@@ -76,8 +76,8 @@ package sssplayer.net {
 
 		private function loadCellMap(name:String):void {
 			trace("SSSProjectLoader.loadCellMap()");
-			var _this:SSSProjectLoader = this;
-			var task:SSSLoaderTask = this.tasks.spawn();
+			var _this:SSProjectLoader = this;
+			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			var loader:Loader = new Loader();
 			var xml:XML;
