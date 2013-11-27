@@ -13,7 +13,7 @@ package jp.promotal.ssplayer.data {
 		public function set tag(value:String):void {
 			this._tag = value;
 			if (defaultValue(value) === undefined) {
-				trace("SSAttribute.tag(): Attribute not supported:", value);
+				trace("[SSProject] SSAttribute.tag(): Attribute not supported:", value);
 			}
 		}
 
