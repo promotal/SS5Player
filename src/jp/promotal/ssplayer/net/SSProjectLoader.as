@@ -19,6 +19,8 @@ package jp.promotal.ssplayer.net {
 		private var tasks:SSLoaderTask;
 		private var directoryURL:String;
 
+		public static var DEBUG:Boolean = false;
+
 		private function toURLRequest(fileName:String):URLRequest {
 			return new URLRequest(this.directoryURL + "/" + fileName);
 		}
@@ -40,15 +42,15 @@ package jp.promotal.ssplayer.net {
 		}
 
 		private function loadProject(request:URLRequest):void {
-			trace("SSSProjectLoader.loadProject()");
+			debugTrace("SSSProjectLoader.loadProject()");
 			var _this:SSProjectLoader = this;
 			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadProjectComplete));
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! project読み込み失敗"));
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Project load failed: "));
 			urlLoader.load(request);
 			function onLoadProjectComplete(event:Event):void {
-				trace("SSSProjectLoader.onLoadProjectComplete()");
+				debugTrace("SSSProjectLoader.onLoadProjectComplete()");
 				var xml:XML = XML(URLLoader(event.target).data);
 				for each (var anime:XML in xml.animepackNames.value) {
 					_this.loadAnimepack(anime.text());
@@ -60,40 +62,40 @@ package jp.promotal.ssplayer.net {
 		}
 
 		private function loadAnimepack(name:String):void {
-			trace("SSSProjectLoader.loadAnimepack()");
+			debugTrace("SSSProjectLoader.loadAnimepack()");
 			var _this:SSProjectLoader = this;
 			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadAnimepackComplete));
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! アニメーション読み込み失敗" + name));
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Animepack load failed: " + name));
 			urlLoader.load(this.toURLRequest(name));
 			function onLoadAnimepackComplete(event:Event):void {
-				trace("SSSProjectLoader.onLoadAnimepackComplete()");
+				debugTrace("SSSProjectLoader.onLoadAnimepackComplete()");
 				var xml:XML = XML(urlLoader.data);
 				_this.project.addAnimePackXML(xml, name)
 			}
 		}
 
 		private function loadCellMap(name:String):void {
-			trace("SSSProjectLoader.loadCellMap()");
+			debugTrace("SSSProjectLoader.loadCellMap()");
 			var _this:SSProjectLoader = this;
 			var task:SSLoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			var loader:Loader = new Loader();
 			var xml:XML;
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadCellMapComplete));
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! セルマップ読み込み失敗" + name));
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Cellmap load failed: " + name));
 			urlLoader.load(this.toURLRequest(name));
 			function onLoadCellMapComplete(event:Event):void {
-				trace("SSSProjectLoader.onLoadCellMapComplete()");
+				debugTrace("SSSProjectLoader.onLoadCellMapComplete()");
 				XML.ignoreWhitespace = false; // XXX dirty hack
 				xml = XML(urlLoader.data);
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadCellMapTextureComplete));
-				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("error! テクスチャ読み込み失敗" + xml.imagePath));
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Texture load failed: " + xml.imagePath));
 				loader.load(_this.toURLRequest(xml.imagePath));
 			}
 			function onLoadCellMapTextureComplete(event:Event):void {
-				trace("SSSProjectLoader.onLoadCellMapTextureComplete()");
+				debugTrace("SSSProjectLoader.onLoadCellMapTextureComplete()");
 				var texture:Texture;
 				var bitmap:Bitmap = Bitmap(loader.content);
 				if (bitmap.width > 2048 || bitmap.height > 2048) {
@@ -109,9 +111,15 @@ package jp.promotal.ssplayer.net {
 			}
 		}
 
+		private function debugTrace(text:String):void {
+			if (DEBUG) {
+				trace("[SSProjectLoader]", text);
+			}
+		}
+
 		private function listenAndDie(text:String):Function {
 			return function(event:Event):void {
-				trace(text);
+				trace("[SSProjectLoader]", text);
 			}
 		}
 	}
