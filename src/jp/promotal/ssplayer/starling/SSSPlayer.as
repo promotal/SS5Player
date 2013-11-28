@@ -90,17 +90,22 @@ package jp.promotal.ssplayer.starling {
 			this.project = project;
 		}
 
-		public function setAnime(name:String):SSSPlayer {
-			this.model = this.project.modelForAnime(name);
-			this._anime = this.project.anime(name);
+		public function setAnime(name:String, modelName:String = null):SSSPlayer {
+			if (modelName) {
+				this.model = this.project.model(modelName);
+				this._anime = this.model.anime(name);
+			} else {
+				this.model = this.project.modelForAnime(name);
+				this._anime = this.project.anime(name);
+			}
 			this.prepareChildren();
 			this._currentFrame = 0;
 			this.updateParts();
 			return this;
 		}
 
-		public function startAnime(name:String):SSSPlayer {
-			this.setAnime(name);
+		public function startAnime(name:String, modelName:String = null):SSSPlayer {
+			this.setAnime(name, modelName);
 			this.isPlaying = true;
 			return this;
 		}

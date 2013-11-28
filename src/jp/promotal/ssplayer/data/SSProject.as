@@ -7,7 +7,7 @@ package jp.promotal.ssplayer.data {
 		public static const DEBUG:Boolean = false;
 
 		private var models:Object;
-		public function model(name:String):SSAnime {
+		public function model(name:String):SSModel {
 			return this.models[name];
 		}
 
@@ -18,6 +18,26 @@ package jp.promotal.ssplayer.data {
 				}
 			}
 			return null;
+		}
+
+		public function get modelAndAnimeNames():Array {
+			var result:Array = [];
+			for each (var model:SSModel in this.models) {
+				for each (var anime:SSAnime in model.animes) {
+					result.push([model.name, anime.name]);
+				}
+			}
+			return result;
+		}
+
+		public function get animeNames():Array {
+			var result:Array = [];
+			for each (var model:SSModel in this.models) {
+				for each (var anime:SSAnime in model.animes) {
+					result.push(anime.name);
+				}
+			}
+			return result;
 		}
 
 		public function anime(name:String):SSAnime {
@@ -47,6 +67,8 @@ package jp.promotal.ssplayer.data {
 
 		public function addAnimePackXML(xml:XML, name:String):SSProject {
 			var model:SSModel = SSModel.fromXML(xml);
+			// XXX use file path as unique id instead of given name. model.name can be non-unique
+			model.name = name;
 			this.models[name] = model;
 			return this;
 		}

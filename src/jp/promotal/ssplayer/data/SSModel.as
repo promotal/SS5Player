@@ -4,6 +4,14 @@ package jp.promotal.ssplayer.data {
 
 		private var _xml:XML;
 
+		private var _name:String;
+		public function get name():String {
+			return this._name;
+		}
+		public function set name(value:String):void {
+			this._name = value;
+		}
+
 		private var _parts:Vector.<SSPart>;
 		public function get parts():Vector.<SSPart> {
 			return this._parts;
@@ -37,6 +45,7 @@ package jp.promotal.ssplayer.data {
 			if (SSProject.DEBUG) {
 				result._xml = xml;
 			}
+			result._name = xml.name;
 			for each (var partXML:XML in xml.Model.partList.value) {
 				var part:SSPart = SSPart.fromXML(partXML);
 				result._parts.push(part);
