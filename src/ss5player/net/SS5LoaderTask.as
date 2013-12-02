@@ -1,13 +1,13 @@
-package jp.promotal.ssplayer.net {
+package ss5player.net {
 
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-	public class SSLoaderTask {
+	public class SS5LoaderTask {
 
 		private var afterFunc:Function;
 
-		private var waitsFor:Vector.<SSLoaderTask>;
+		private var waitsFor:Vector.<SS5LoaderTask>;
 
 		private var _isComplete:Boolean = false;
 		public function get isComplete():Boolean {
@@ -21,7 +21,7 @@ package jp.promotal.ssplayer.net {
 
 		public function get ratio():Number {
 			var result:Number = this._isComplete ? 1 : 0;
-			for each (var task:SSLoaderTask in this.waitsFor) {
+			for each (var task:SS5LoaderTask in this.waitsFor) {
 				var taskRatio:Number = task.ratio;
 				result += taskRatio;
 			}
@@ -30,24 +30,24 @@ package jp.promotal.ssplayer.net {
 
 		private var _event:*;
 
-		public function SSLoaderTask(afterFunc:Function = null) {
+		public function SS5LoaderTask(afterFunc:Function = null) {
 			super();
 			this.afterFunc = afterFunc;
-			this.waitsFor = new Vector.<SSLoaderTask>();
+			this.waitsFor = new Vector.<SS5LoaderTask>();
 		}
 
-		public function waitFor(task:SSLoaderTask):void {
+		public function waitFor(task:SS5LoaderTask):void {
 			this.waitsFor.push(task);
 		}
 
-		public function spawn(afterFunc:Function = null):SSLoaderTask {
-			var task:SSLoaderTask = new SSLoaderTask(afterFunc);
+		public function spawn(afterFunc:Function = null):SS5LoaderTask {
+			var task:SS5LoaderTask = new SS5LoaderTask(afterFunc);
 			this.waitsFor.push(task);
 			return task;
 		}
 
 		public function spawnEventListener(afterFunc:Function = null):Function {
-			var task:SSLoaderTask = new SSLoaderTask(afterFunc);
+			var task:SS5LoaderTask = new SS5LoaderTask(afterFunc);
 			this.waitsFor.push(task);
 			task._waitingEventListenerCount++;
 			return function(event:*/*Event*/):void {
@@ -58,7 +58,7 @@ package jp.promotal.ssplayer.net {
 
 		public function tryRun():Boolean {
 			// run blocking task
-			for each (var task:SSLoaderTask in this.waitsFor) {
+			for each (var task:SS5LoaderTask in this.waitsFor) {
 				if (!task.isComplete) {
 					task.tryRun();
 					return false;

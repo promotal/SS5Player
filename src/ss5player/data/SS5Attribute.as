@@ -1,8 +1,8 @@
-package jp.promotal.ssplayer.data {
+package ss5player.data {
 
-	import jp.promotal.ssplayer.utils.SSInterpolation;
+	import ss5player.utils.SS5Interpolation;
 
-	public class SSAttribute {
+	public class SS5Attribute {
 
 		private var _xml:XML;
 
@@ -38,7 +38,6 @@ package jp.promotal.ssplayer.data {
 				default:
 					return undefined;
 			}
-
 		}
 
 		private var _keyFrames:Array;
@@ -52,13 +51,13 @@ package jp.promotal.ssplayer.data {
 				return this._frames;
 			}
 			this._frames = [];
-			for each (var keyFrame:SSKeyFrame in this.keyFrames) {
+			for each (var keyFrame:SS5KeyFrame in this.keyFrames) {
 				this._frames[keyFrame.time] = keyFrame;
 			}
 			for (var i:int = 0; i < this._frames.length; i++) {
-				var startFrame:SSFrame = this._frames[i];
+				var startFrame:SS5Frame = this._frames[i];
 				if (startFrame) {
-					var endFrame:SSFrame = null;
+					var endFrame:SS5Frame = null;
 					for (var j:int = i + 1; j < this._frames.length; j++) {
 						if (this._frames[j]) {
 							endFrame = this._frames[j];
@@ -67,8 +66,8 @@ package jp.promotal.ssplayer.data {
 					}
 					if (endFrame) {
 						for (var k:int = i + 1; k < j; k++) {
-							var frame:SSFrame = new SSFrame();
-							frame.value = SSInterpolation.interpolate(startFrame.ipType, i, j, k, startFrame.value, endFrame.value);
+							var frame:SS5Frame = new SS5Frame();
+							frame.value = SS5Interpolation.interpolate(startFrame.ipType, i, j, k, startFrame.value, endFrame.value);
 							this._frames[k] = frame;
 						}
 						i = j - 1;
@@ -79,9 +78,9 @@ package jp.promotal.ssplayer.data {
 		}
 
 		public function valueAt(time:Number):* {
-			var prevKeyFrame:SSKeyFrame = null;
-			var nextKeyFrame:SSKeyFrame = null;
-			for each (var keyFrame:SSKeyFrame in this.keyFrames) {
+			var prevKeyFrame:SS5KeyFrame = null;
+			var nextKeyFrame:SS5KeyFrame = null;
+			for each (var keyFrame:SS5KeyFrame in this.keyFrames) {
 				if (keyFrame.time <= time) {
 					if (!prevKeyFrame || keyFrame.time > prevKeyFrame.time) {
 						prevKeyFrame = keyFrame;
@@ -98,28 +97,28 @@ package jp.promotal.ssplayer.data {
 			if (!nextKeyFrame) {
 				return prevKeyFrame.value;
 			}
-			return SSInterpolation.interpolate(prevKeyFrame.ipType, prevKeyFrame.time, nextKeyFrame.time, time, prevKeyFrame.value, nextKeyFrame.value);
+			return SS5Interpolation.interpolate(prevKeyFrame.ipType, prevKeyFrame.time, nextKeyFrame.time, time, prevKeyFrame.value, nextKeyFrame.value);
 		}
 
-		public function SSAttribute() {
+		public function SS5Attribute() {
 			super();
 			this._keyFrames = [];
 		}
 
-		public static function empty(tag:String):SSAttribute {
-			var result:SSAttribute = new SSAttribute();
+		public static function empty(tag:String):SS5Attribute {
+			var result:SS5Attribute = new SS5Attribute();
 			result.tag = tag;
 			return result;
 		}
 
-		public static function fromXML(xml:XML):SSAttribute {
-			var result:SSAttribute = new SSAttribute();
-			if (SSProject.DEBUG) {
+		public static function fromXML(xml:XML):SS5Attribute {
+			var result:SS5Attribute = new SS5Attribute();
+			if (SS5Project.DEBUG) {
 				result._xml = xml;
 			}
 			result.tag = xml.@tag;
 			for each (var key:XML in xml.key) {
-				var keyFrame:SSKeyFrame = SSKeyFrame.fromXML(key);
+				var keyFrame:SS5KeyFrame = SS5KeyFrame.fromXML(key);
 				result._keyFrames.push(keyFrame);
 			}
 			return result;

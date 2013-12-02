@@ -1,10 +1,10 @@
-package jp.promotal.ssplayer.data {
+package ss5player.data {
 
 	import flash.geom.Rectangle;
 
 	import starling.textures.Texture;
 
-	public class SSCell {
+	public class SS5Cell {
 
 		public var texture:Texture;
 
@@ -35,13 +35,13 @@ package jp.promotal.ssplayer.data {
 			return this._pivotY ||= (-Number(this.pivot[1]) + 0.5) * this.pictArea.height;
 		}
 
-		public function SSCell() {
+		public function SS5Cell() {
 			super();
 		}
 
-		public static function fromXML(xml:XML, texture:Texture):SSCell {
-			var result:SSCell = new SSCell();
-			if (SSProject.DEBUG) {
+		public static function fromXML(xml:XML, texture:Texture):SS5Cell {
+			var result:SS5Cell = new SS5Cell();
+			if (SS5Project.DEBUG) {
 				result._xml = xml;
 			}
 			result._name = xml.name;

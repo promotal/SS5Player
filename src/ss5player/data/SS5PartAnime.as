@@ -1,6 +1,6 @@
-package jp.promotal.ssplayer.data {
+package ss5player.data {
 
-	public class SSPartAnime {
+	public class SS5PartAnime {
 
 		private var _xml:XML;
 
@@ -13,27 +13,27 @@ package jp.promotal.ssplayer.data {
 		public function get attributes():Object {
 			return this._attributes;
 		}
-		public function attribute(tag:String):SSAttribute {
-			return this._attributes[tag] ||= SSAttribute.empty(tag);
+		public function attribute(tag:String):SS5Attribute {
+			return this._attributes[tag] ||= SS5Attribute.empty(tag);
 		}
 
 		public function attributeValueAt(tag:String, time:Number):* {
 			return this.attribute(tag).valueAt(time);
 		}
 
-		public function SSPartAnime() {
+		public function SS5PartAnime() {
 			super();
 			this._attributes = {};
 		}
 
-		public static function fromXML(xml:XML):SSPartAnime {
-			var result:SSPartAnime = new SSPartAnime();
-			if (SSProject.DEBUG) {
+		public static function fromXML(xml:XML):SS5PartAnime {
+			var result:SS5PartAnime = new SS5PartAnime();
+			if (SS5Project.DEBUG) {
 				result._xml = xml;
 			}
 			result._partName = xml.partName;
 			for each (var attributeXML:XML in xml.attributes.attribute) {
-				var attribute:SSAttribute = SSAttribute.fromXML(attributeXML);
+				var attribute:SS5Attribute = SS5Attribute.fromXML(attributeXML);
 				result._attributes[attribute.tag] = attribute;
 			}
 			return result;

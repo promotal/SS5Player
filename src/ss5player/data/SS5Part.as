@@ -1,6 +1,6 @@
-package jp.promotal.ssplayer.data {
+package ss5player.data {
 
-	public class SSPart {
+	public class SS5Part {
 
 		private var _xml:XML;
 
@@ -24,13 +24,13 @@ package jp.promotal.ssplayer.data {
 			return this._show;
 		}
 
-		public function SSPart() {
+		public function SS5Part() {
 			super();
 		}
 
-		public static function fromXML(xml:XML):SSPart {
-			var result:SSPart = new SSPart();
-			if (SSProject.DEBUG) {
+		public static function fromXML(xml:XML):SS5Part {
+			var result:SS5Part = new SS5Part();
+			if (SS5Project.DEBUG) {
 				result._xml = xml;
 			}
 			result._name = xml.name;

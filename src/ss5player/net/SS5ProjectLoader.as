@@ -1,4 +1,4 @@
-package jp.promotal.ssplayer.net {
+package ss5player.net {
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -9,14 +9,14 @@ package jp.promotal.ssplayer.net {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
-	import jp.promotal.ssplayer.data.SSProject;
+	import ss5player.data.SS5Project;
 
 	import starling.textures.Texture;
 
-	public class SSProjectLoader {
+	public class SS5ProjectLoader {
 
-		public var project:SSProject;
-		private var tasks:SSLoaderTask;
+		public var project:SS5Project;
+		private var tasks:SS5LoaderTask;
 		private var directoryURL:String;
 
 		public static var DEBUG:Boolean = false;
@@ -25,7 +25,7 @@ package jp.promotal.ssplayer.net {
 			return new URLRequest(this.directoryURL + "/" + fileName);
 		}
 
-		public function SSProjectLoader() {
+		public function SS5ProjectLoader() {
 			super();
 		}
 
@@ -34,17 +34,17 @@ package jp.promotal.ssplayer.net {
 			if (this.project) {
 				return;
 			}
-			this.project = new SSProject();
+			this.project = new SS5Project();
 			this.directoryURL = request.url.slice(0, request.url.lastIndexOf("/"));
-			this.tasks = new SSLoaderTask();
+			this.tasks = new SS5LoaderTask();
 			this.loadProject(request);
 			this.tasks.start(onProgress);
 		}
 
 		private function loadProject(request:URLRequest):void {
 			debugTrace("SSSProjectLoader.loadProject()");
-			var _this:SSProjectLoader = this;
-			var task:SSLoaderTask = this.tasks.spawn();
+			var _this:SS5ProjectLoader = this;
+			var task:SS5LoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadProjectComplete));
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Project load failed: "));
@@ -63,8 +63,8 @@ package jp.promotal.ssplayer.net {
 
 		private function loadAnimepack(name:String):void {
 			debugTrace("SSSProjectLoader.loadAnimepack()");
-			var _this:SSProjectLoader = this;
-			var task:SSLoaderTask = this.tasks.spawn();
+			var _this:SS5ProjectLoader = this;
+			var task:SS5LoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, task.spawnEventListener(onLoadAnimepackComplete));
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, listenAndDie("Error! Animepack load failed: " + name));
@@ -78,8 +78,8 @@ package jp.promotal.ssplayer.net {
 
 		private function loadCellMap(name:String):void {
 			debugTrace("SSSProjectLoader.loadCellMap()");
-			var _this:SSProjectLoader = this;
-			var task:SSLoaderTask = this.tasks.spawn();
+			var _this:SS5ProjectLoader = this;
+			var task:SS5LoaderTask = this.tasks.spawn();
 			var urlLoader:URLLoader = new URLLoader();
 			var loader:Loader = new Loader();
 			var xml:XML;

@@ -1,27 +1,25 @@
-package jp.promotal.ssplayer.starling {
+package ss5player.players.starling {
 
 	import flash.geom.Point;
 
-	import jp.promotal.ssplayer.data.SSModel;
-	import jp.promotal.ssplayer.data.SSPartAnime;
-	import jp.promotal.ssplayer.data.SSProject;
-	import jp.promotal.ssplayer.data.SSAnime;
-	import jp.promotal.ssplayer.data.SSPart;
+	import ss5player.data.SS5Model;
+	import ss5player.data.SS5PartAnime;
+	import ss5player.data.SS5Project;
+	import ss5player.data.SS5Anime;
+	import ss5player.data.SS5Part;
 
 	import starling.display.DisplayObject;
 
 	import starling.display.Sprite;
 	import starling.events.Event;
 
-	public class SSSPlayer extends Sprite {
+	public class SS5StarlingPlayer extends Sprite {
 
-		public static const VERSION:String = "0.1.0";
+		private var project:SS5Project;
 
-		private var project:SSProject;
-
-		private var model:SSModel;
-		private var _anime:SSAnime;
-		public function get anime():SSAnime {
+		private var model:SS5Model;
+		private var _anime:SS5Anime;
+		public function get anime():SS5Anime {
 			return this._anime;
 		}
 
@@ -34,8 +32,8 @@ package jp.promotal.ssplayer.starling {
 			this.updateParts();
 		}
 
-		private var _partPlayers:Vector.<SSSPartPlayer>;
-		public function get partPlayers():Vector.<SSSPartPlayer> {
+		private var _partPlayers:Vector.<SS5StarlingPartPlayer>;
+		public function get partPlayers():Vector.<SS5StarlingPartPlayer> {
 			return this._partPlayers.concat();
 		}
 
@@ -80,17 +78,17 @@ package jp.promotal.ssplayer.starling {
 		}
 
 		public function set color(value:uint):void {
-			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
+			for each (var partPlayer:SS5StarlingPartPlayer in this._partPlayers) {
 				partPlayer.color = value;
 			}
 		}
 
-		public function SSSPlayer(project:SSProject) {
+		public function SS5StarlingPlayer(project:SS5Project) {
 			super();
 			this.project = project;
 		}
 
-		public function setAnime(name:String, modelName:String = null):SSSPlayer {
+		public function setAnime(name:String, modelName:String = null):SS5StarlingPlayer {
 			if (modelName) {
 				this.model = this.project.model(modelName);
 				this._anime = this.model.anime(name);
@@ -104,7 +102,7 @@ package jp.promotal.ssplayer.starling {
 			return this;
 		}
 
-		public function startAnime(name:String, modelName:String = null):SSSPlayer {
+		public function startAnime(name:String, modelName:String = null):SS5StarlingPlayer {
 			this.setAnime(name, modelName);
 			this.isPlaying = true;
 			return this;
@@ -133,21 +131,21 @@ package jp.promotal.ssplayer.starling {
 
 		private function prepareChildren():void {
 			this.removeChildren();
-			this._partPlayers = new Vector.<SSSPartPlayer>();
-			for each (var part:SSPart in this.model.parts) {
-				var partAnime:SSPartAnime = this._anime.partAnimes[part.name];
-				var parentPartPlayer:SSSPartPlayer = null;
+			this._partPlayers = new Vector.<SS5StarlingPartPlayer>();
+			for each (var part:SS5Part in this.model.parts) {
+				var partAnime:SS5PartAnime = this._anime.partAnimes[part.name];
+				var parentPartPlayer:SS5StarlingPartPlayer = null;
 				if (part.parentIndex > -1) {
 					parentPartPlayer = this._partPlayers[part.parentIndex];
 				}
-				var partPlayer:SSSPartPlayer = new SSSPartPlayer(this.project, this.model, part, partAnime, parentPartPlayer);
+				var partPlayer:SS5StarlingPartPlayer = new SS5StarlingPartPlayer(this.project, this.model, part, partAnime, parentPartPlayer);
 				this.addChild(partPlayer);
 				this._partPlayers.push(partPlayer);
 			}
 		}
 
 		private function updateParts():void {
-			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
+			for each (var partPlayer:SS5StarlingPartPlayer in this._partPlayers) {
 				partPlayer.currentFrame = this._currentFrame;
 			}
 			if (this._withFlatten) {
@@ -155,7 +153,7 @@ package jp.promotal.ssplayer.starling {
 			}
 		}
 
-		public function partPlayerAt(x:Number, y:Number, forTouch:Boolean = false):SSSPartPlayer {
+		public function partPlayerAt(x:Number, y:Number, forTouch:Boolean = false):SS5StarlingPartPlayer {
 			var touchable:Boolean = this.touchable;
 			this.touchable = true;
 			var hitObject:DisplayObject = this.hitTest(new Point(x, y), forTouch);
@@ -163,7 +161,7 @@ package jp.promotal.ssplayer.starling {
 			if (!hitObject) {
 				return null;
 			}
-			for each (var partPlayer:SSSPartPlayer in this._partPlayers) {
+			for each (var partPlayer:SS5StarlingPartPlayer in this._partPlayers) {
 				if (hitObject.parent == partPlayer) {
 					return partPlayer;
 				}
@@ -172,7 +170,7 @@ package jp.promotal.ssplayer.starling {
 		}
 
 		public function partNameAt(x:Number, y:Number, forTouch:Boolean = false):String {
-			var partPlayer:SSSPartPlayer = this.partPlayerAt(x, y, forTouch);
+			var partPlayer:SS5StarlingPartPlayer = this.partPlayerAt(x, y, forTouch);
 			return partPlayer ? partPlayer.name : null;
 		}
 

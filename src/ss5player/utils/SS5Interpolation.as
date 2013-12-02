@@ -1,7 +1,7 @@
-package jp.promotal.ssplayer.utils {
+package ss5player.utils {
 
-	public class SSInterpolation {
-		public function SSInterpolation() {
+	public class SS5Interpolation {
+		public function SS5Interpolation() {
 		}
 
 		public static function interpolate(ipType:String, timeStart:Number, timeEnd:Number, timeNow:Number, valueStart:*, valueEnd:*):* {
