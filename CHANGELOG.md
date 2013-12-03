@@ -1,4 +1,9 @@
-# SSSPlayer: Changelog
+# SS5Player for AS3: Changelog
+
+## version 0.2 - 2013-12-2
+
+- renamed library to "SS5Player for AS3"
+- generated asdoc
 
 ## version 0.1 - 2013-11-22
 
