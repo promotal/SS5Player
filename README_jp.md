@@ -150,5 +150,5 @@ Simplified BSD License.
 * OPTPiX、SpriteStudio、Web Technologyは、
   [株式会社ウェブテクノロジ](http://www.webtech.co.jp/)の登録商標です。
 * Adobe、Adobe AIR、Flash、Adobe Flash Playerは、
-  [Adobe Systems Incorporated(アドビシステムズ社)](http://www.adobe.com/)の商標または登録商標です。
+  [Adobe Systems Incorporated(アドビシステムズ社)](http://www.adobe.com/jp/)の商標または登録商標です。
 * その他の商品名は各社の登録商標または商標です。
