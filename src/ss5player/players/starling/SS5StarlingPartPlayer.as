@@ -14,6 +14,11 @@ package ss5player.players.starling {
 	import starling.display.Sprite;
 	import starling.textures.Texture;
 
+	/**
+	 * A Starling DisplayObject for SpriteStudio partAnime playbacks.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5StarlingPartPlayer extends Sprite {
 
 		private var project:SS5Project;

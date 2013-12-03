@@ -1,5 +1,10 @@
 package ss5player.data {
 
+	/**
+	 * A structure which represents a SpriteStudio key frame.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5KeyFrame extends SS5Frame {
 
 		private var _xml:XML;

@@ -1,5 +1,10 @@
 package ss5player.data {
 
+	/**
+	 * A structure which represents a SpriteStudio model and related SpriteStudio anime pack.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Model {
 
 		private var _xml:XML;

@@ -1,5 +1,10 @@
 package ss5player.data {
 
+	/**
+	 * A structure which represents a SpriteStudio part.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Part {
 
 		private var _xml:XML;

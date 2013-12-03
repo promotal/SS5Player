@@ -1,5 +1,10 @@
 package ss5player.data {
 
+	/**
+	 * A structure which represents a SpriteStudio cell reference, used in values of key frames.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5CellName {
 
 		private var _xml:XML;

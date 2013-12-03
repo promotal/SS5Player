@@ -2,6 +2,11 @@ package ss5player.data {
 
 	import ss5player.utils.SS5Interpolation;
 
+	/**
+	 * A structure which represents a SpriteStudio attribute.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Attribute {
 
 		private var _xml:XML;

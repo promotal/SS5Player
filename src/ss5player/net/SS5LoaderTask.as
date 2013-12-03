@@ -3,6 +3,11 @@ package ss5player.net {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
+	/**
+	 * A small utility class to manage loading multiple files, and other kinds of task queueing.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5LoaderTask {
 
 		private var afterFunc:Function;

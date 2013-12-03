@@ -1,5 +1,10 @@
 package ss5player.utils {
 
+	/**
+	 * Helper structure which represents a color value.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Color {
 
 		private var _alpha:Number;

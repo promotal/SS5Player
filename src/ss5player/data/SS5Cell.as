@@ -4,6 +4,11 @@ package ss5player.data {
 
 	import starling.textures.Texture;
 
+	/**
+	 * A structure which represents a SpriteStudio cell.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Cell {
 
 		public var texture:Texture;

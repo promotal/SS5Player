@@ -13,23 +13,44 @@ package ss5player.net {
 
 	import starling.textures.Texture;
 
+	/**
+	 * Loader of SpriteStudio project file (.sspj).
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5ProjectLoader {
 
+		/** Loaded SpriteStudio project, or <code>null</code> if not loading is not completed. */
 		public var project:SS5Project;
+
 		private var tasks:SS5LoaderTask;
 		private var directoryURL:String;
 
+		/** Enables verbose logging when set to <code>true</code>. */
 		public static var DEBUG:Boolean = false;
 
 		private function toURLRequest(fileName:String):URLRequest {
 			return new URLRequest(this.directoryURL + "/" + fileName);
 		}
 
+		/**
+		 * Constructor.
+		 */
 		public function SS5ProjectLoader() {
 			super();
 		}
 
-		/* onProgress is function(ratio:Number) where 0 <= ratio <= 1 */
+		/**
+		 * Initiates loading a SpriteStudio project file asynchronously.
+		 * <p>
+		 *     <code>onProgress()</code> will be repeatedly called with <code>ratio</code> where <code>0 &lt;= ratio &lt;= 1</code>.
+		 * </p>
+		 * <p>
+		 *     When loading is complete, <code>onProgress()</code> is called with <code>ratio = 1</code>
+		 *     and <code>project</code> is ready to use.
+		 * </p>
+		 * @param request path to the SpriteStudio project file (.sspj) to load.
+		 * @param onProgress function(ratio:Number):void;
+		 */
 		public function load(request:URLRequest, onProgress:Function):void {
 			if (this.project) {
 				return;

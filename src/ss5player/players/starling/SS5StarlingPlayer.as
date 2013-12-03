@@ -13,17 +13,23 @@ package ss5player.players.starling {
 	import starling.display.Sprite;
 	import starling.events.Event;
 
+	/**
+	 * A Starling DisplayObject for SpriteStudio animation playbacks.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5StarlingPlayer extends Sprite {
 
 		private var project:SS5Project;
 
 		private var model:SS5Model;
 		private var _anime:SS5Anime;
+		/** Current anime. */
 		public function get anime():SS5Anime {
 			return this._anime;
 		}
 
 		private var _currentFrame:Number;
+		/** Current frame number (can be fractional). */
 		public function get currentFrame():Number {
 			return this._currentFrame;
 		}
@@ -33,11 +39,13 @@ package ss5player.players.starling {
 		}
 
 		private var _partPlayers:Vector.<SS5StarlingPartPlayer>;
+		/** @private */
 		public function get partPlayers():Vector.<SS5StarlingPartPlayer> {
 			return this._partPlayers.concat();
 		}
 
 		private var _isPlaying:Boolean = false;
+		/** <code>true</code> if the animation is playing. */
 		public function get isPlaying():Boolean {
 			return this._isPlaying;
 		}
@@ -54,6 +62,7 @@ package ss5player.players.starling {
 		}
 
 		private var _loop:Boolean = true;
+		/** Set to <code>true</code> to enable loop of the animation playback. */
 		public function get loop():Boolean {
 			return this._loop;
 		}
@@ -62,6 +71,7 @@ package ss5player.players.starling {
 		}
 
 		private var _withFlatten:Boolean = false;
+		/** Set to <code>true</code> to call <code>Sprite.flatten()</code> on each display state update. */
 		public function get withFlatten():Boolean {
 			return this._withFlatten;
 		}
@@ -77,17 +87,27 @@ package ss5player.players.starling {
 			}
 		}
 
+		/** @private */
 		public function set color(value:uint):void {
 			for each (var partPlayer:SS5StarlingPartPlayer in this._partPlayers) {
 				partPlayer.color = value;
 			}
 		}
 
+		/**
+		 * Constructor.
+		 * @param project SpriteStudio project to display.
+		 */
 		public function SS5StarlingPlayer(project:SS5Project) {
 			super();
 			this.project = project;
 		}
 
+		/**
+		 * Selects animation to play by name.
+		 * @param name The name of the animation.
+ 		 * @param modelName If not <code>null</code>, animation is searched from the given model or anime pack.
+		 */
 		public function setAnime(name:String, modelName:String = null):SS5StarlingPlayer {
 			if (modelName) {
 				this.model = this.project.model(modelName);
@@ -102,16 +122,29 @@ package ss5player.players.starling {
 			return this;
 		}
 
+		/**
+		 * Calls <code>setAnime()</code> and <code>play()</code> in order.
+		 * @see SS5StarlingPlayer#play()
+		 * @see SS5StarlingPlayer#setAnime()
+		 * @param name The name of the animation.
+		 * @param modelName If not <code>null</code>, animation is searched from the given model or anime pack.
+		 */
 		public function startAnime(name:String, modelName:String = null):SS5StarlingPlayer {
 			this.setAnime(name, modelName);
 			this.isPlaying = true;
 			return this;
 		}
 
+		/**
+		 * Start playback of the animation.
+		 */
 		public function play():void {
 			this.isPlaying = true;
 		}
 
+		/**
+		 * Stops playback of the animation.
+		 */
 		public function stop():void {
 			this.isPlaying = false;
 		}
@@ -153,6 +186,13 @@ package ss5player.players.starling {
 			}
 		}
 
+		/**
+		 * Returns a <code>SS5StarlingPartPlayer</code> at the given location,
+		 * or <code>null</code> if nothing is found at the given position.
+		 * @param x The x coordinate.
+		 * @param y The y coordinate.
+		 * @param forTouch Passed to <code>hitTest()</code>.
+		 */
 		public function partPlayerAt(x:Number, y:Number, forTouch:Boolean = false):SS5StarlingPartPlayer {
 			var touchable:Boolean = this.touchable;
 			this.touchable = true;
@@ -169,6 +209,13 @@ package ss5player.players.starling {
 			return null;
 		}
 
+		/**
+		 * Returns the name of the part at the given location,
+		 * or <code>null</code> if nothing is found at the given position.
+		 * @param x The x coordinate.
+		 * @param y The y coordinate.
+		 * @param forTouch Passed to <code>hitTest()</code>.
+		 */
 		public function partNameAt(x:Number, y:Number, forTouch:Boolean = false):String {
 			var partPlayer:SS5StarlingPartPlayer = this.partPlayerAt(x, y, forTouch);
 			return partPlayer ? partPlayer.name : null;

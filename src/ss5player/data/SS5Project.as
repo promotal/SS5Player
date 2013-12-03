@@ -2,6 +2,11 @@ package ss5player.data {
 
 	import starling.textures.Texture;
 
+	/**
+	 * A structure which represents a SpriteStudio project(.sspj).
+	 * Methods and fields are internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Project {
 
 		public static const DEBUG:Boolean = false;

@@ -1,6 +1,12 @@
 package ss5player.utils {
 
+	/**
+	 * Helper methods to interpolate various values.
+	 * Is internal and API may break on library version update.
+	 * @author PROMOTAL Inc.
+	 */
 	public class SS5Interpolation {
+
 		public function SS5Interpolation() {
 		}
 
