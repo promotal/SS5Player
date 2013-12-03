@@ -148,7 +148,12 @@ Copyrights
 Copyright (c) 2013, PROMOTAL Inc. All rights reserved.
 Simplified BSD License.
 
-Also refer [LICENCE.md](https://github.com/promotal/SS5Player/blob/master/LICENSE.md).
+Also refer [LICENSE.md](https://github.com/promotal/SS5Player/blob/master/LICENSE.md).
 
-* SpriteStudio and Web Technology are the registered trademarks of [Web Technology Corp.](http://www.webtech.co.jp/)
+Latest version of this software can be found at [here](https://github.com/promotal/SS5Player/).
+
+* Web Technology, OPTPiX, SpriteStudio and Web Technology are the registered trademarks of
+  [Web Technology Corp.](http://www.webtech.co.jp/)
+* Adobe, Adobe AIR, Flash, and Adobe Flash Player are the registered trademarks of
+  [Adobe Systems Incorporated.](http://www.adobe.com/)
 * Other product names are registered trademarks or trademarks of their respective companies.
