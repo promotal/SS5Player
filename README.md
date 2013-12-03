@@ -1,11 +1,15 @@
 SS5Player for AS3
 =================
 
+See [README_jp.md](https://github.com/promotal/SS5Player/blob/master/README_jp.md) for Japanese documentation.
+
 About this library
 ------------------
 
-"SS5Player for AS3" is an ActionScript 3 library which displays
-[OPTPiX SpriteStudio](http://www.webtech.co.jp/spritestudio/) animation data with [Starling Framework](http://starling-framework.org/).
+"SS5Player for AS3" is an ActionScript 3 library which enables Flash to display
+[OPTPiX SpriteStudio](http://www.webtech.co.jp/spritestudio/) animation data.
+
+Currently, [Starling Framework](http://starling-framework.org/) is supported as display target.
 
 
 Requirements
@@ -16,36 +20,55 @@ Requirements
 * OPTPiX SpriteStudio, version 5
 
 
+Demo
+-------------
+
+TBD
+
+
 Simple Example
 --------------
 
 Try this in Starling Sprite:
 
-	var loader:SS5ProjectLoader;
-	const SSPJ:String = "path/to/your/SpriteStudioProject.sspj";
+	public class SS5Viewer extends Sprite {
 
-	this.loader = new SS5ProjectLoader();
-	this.loader.load(new URLRequest(SSPJ), this.onProgress);
+		private var loader:SS5ProjectLoader;
 
-	private function onProgress(progress:Number):void {
-		if (progress == 1) {
-			// progress is 1 when loading is complete
-			var player:SS5StarlingPlayer = new SS5StarlingPlayer(this.loader.project);
-			player.startAnime("nameOfYourAnime");
-			this.addChild(player);
+		public function SS5Viewer() {
+			const SSPJ:String = "path/to/your/SpriteStudioProject.sspj";
+			this.loader = new SS5ProjectLoader();
+			this.loader.load(new URLRequest(SSPJ), this.onProgress);
+		}
+
+		private function onProgress(progress:Number):void {
+			if (progress == 1) {
+				// progress is 1 when loading is complete
+				var player:SS5StarlingPlayer = new SS5StarlingPlayer(this.loader.project);
+				player.startAnime("nameOfYourAnime");
+				this.addChild(player);
+			}
 		}
 	}
-
 
 Detailed Usage
 --------------
 
-### Loading 
-Use ```SS5ProjectLoader``` to load a ```.sspj``` file.
+### Loading a Project
 
-Note: All of the related ```.ssae```, ```.ssce```, and texture files must be placed along with ```.sspj```.
+"SS5Player for AS3" can read SpriteStudio project files (```.sspj```) without conversion.
+Use ```SS5ProjectLoader``` to load a SpriteStudio project file (```.sspj```).
 
-When loading is complete, you can retrieve the SpriteStudio project as ```SS5Project``` from ```SS5ProjectLoader.project```.
+```SS5ProjectLoader.load()``` requires two arguments, ```URLRequest``` and ```Function```.
+First argument locates the target SpriteStudio project file to load.
+Second argument is callback to be called when loading has progressed or completed.
+(It is similar to using ```AssetManager.loadQueue()``` of Starling.)
+
+Note: All of the related anime packs (```.ssae```), cell maps (```.ssce```),
+and texture files must be placed along with the project file.
+
+When loading is complete,
+you can retrieve the SpriteStudio project as ```SS5Project``` from ```SS5ProjectLoader.project```.
 
 	var loader:SS5ProjectLoader;
 	const SSPJ:String = "path/to/your/SpriteStudioProject.sspj";
@@ -58,9 +81,10 @@ When loading is complete, you can retrieve the SpriteStudio project as ```SS5Pro
 		}
 	}
 
-### Display SpriteStudio animation
+### Displaying SpriteStudio animation
 
-Add a ```SS5StarlingPlayer``` to a Starling ```DisplayObject``` to display the animation data with Starling.
+```SS5StarlingPlayer``` is a Starling ```DisplayObject```
+which can display the SpriteStudio animation data with Starling.
 
 	var player:SS5StarlingPlayer = new SS5StarlingPlayer(this.loader.project);
 	this.addChild(player);
@@ -85,7 +109,8 @@ Setting ```loop``` to ```true``` will loop the animation.
 
 	player.loop = true;
 
-Setting ```withFlatten``` to ```true``` will call ```Sprite.flatten()``` of Starling on each display update, which may improve performance for GPU optimized data.
+Setting ```withFlatten``` to ```true``` will call ```Sprite.flatten()``` of Starling on each display update,
+which may improve performance for GPU optimized data.
 
 	player.withFlatten = true;
 
@@ -96,7 +121,7 @@ Use ```partNameAt()``` and ```partPlayerAt()``` to ```hitTest()``` against parts
 
 ### Specs
 
-Currently, these attributes are supported:  
+Currently, these attributes are supported:
 (will work with some of the most basic animations)
 
 	"CELL"
@@ -117,7 +142,13 @@ API Reference
 TBD
 
 
-Trademark Info
---------------
+Copyrights
+----------
 
-[OPTPiX SpriteStudio](http://www.webtech.co.jp/spritestudio/) is trademark of [Web Technology Corp.](http://www.webtech.co.jp/)
+Copyright (c) 2013, PROMOTAL Inc. All rights reserved.
+Simplified BSD License.
+
+Also refer [LICENCE.md](https://github.com/promotal/SS5Player/blob/master/LICENSE.md).
+
+* SpriteStudio and Web Technology are the registered trademarks of [Web Technology Corp.](http://www.webtech.co.jp/)
+* Other product names are registered trademarks or trademarks of their respective companies.
