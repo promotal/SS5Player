@@ -7,7 +7,7 @@ About this library
 ------------------
 
 "SS5Player for AS3" is an ActionScript 3 library which enables Flash to display
-[OPTPiX SpriteStudio](http://www.webtech.co.jp/spritestudio/) animation data.
+[OPTPiX SpriteStudio](http://www.webtech.co.jp/eng/spritestudio/index.html) animation data.
 
 Currently, [Starling Framework](http://starling-framework.org/) is supported as display target.
 
@@ -153,7 +153,7 @@ Also refer [LICENSE.md](https://github.com/promotal/SS5Player/blob/master/LICENS
 Latest version of this software can be found at [here](https://github.com/promotal/SS5Player/).
 
 * Web Technology, OPTPiX, SpriteStudio and Web Technology are the registered trademarks of
-  [Web Technology Corp.](http://www.webtech.co.jp/)
+  [Web Technology Corp.](http://www.webtech.co.jp/eng/index.html)
 * Adobe, Adobe AIR, Flash, and Adobe Flash Player are the registered trademarks of
   [Adobe Systems Incorporated.](http://www.adobe.com/)
 * Other product names are registered trademarks or trademarks of their respective companies.
