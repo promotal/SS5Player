@@ -27,7 +27,7 @@ package ss5player.data {
 				case "CELL":
 					return null;
 				case "HIDE":
-					return 0;
+					return 1;
 				case "POSX":
 					return 0;
 				case "POSY":
