@@ -102,7 +102,11 @@ package ss5player.players.starling {
 						this.cell = null;
 					} else {
 						var cellName:SS5CellName = this.partAnime.attributeValueAt("CELL", time);
-						this.cell = cellName.resolve(this.project, this.model);
+						if (cellName) {
+							this.cell = cellName.resolve(this.project, this.model);
+						} else {
+							this.cell = null;
+						}
 						var matrix:Matrix = new Matrix();
 						matrix.scale(
 							this.partAnime.attributeValueAt("SCLX", time),
