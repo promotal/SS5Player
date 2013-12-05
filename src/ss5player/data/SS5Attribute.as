@@ -97,7 +97,8 @@ package ss5player.data {
 				}
 			}
 			if (!prevKeyFrame) {
-				return nextKeyFrame ? nextKeyFrame.value : defaultValue(this.tag);
+				//return nextKeyFrame ? nextKeyFrame.value : defaultValue(this.tag);
+				return defaultValue(this.tag);
 			}
 			if (!nextKeyFrame) {
 				return prevKeyFrame.value;
