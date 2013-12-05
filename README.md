@@ -23,7 +23,11 @@ Requirements
 Demo
 -------------
 
-TBD
+Working sample is here:
+
+[http://promotal.jp/ss5player/SS5Viewer/SS5Viewer.html](http://promotal.jp/ss5player/SS5Viewer/SS5Viewer.html)
+
+Animation data included in this sample belongs to Web Technology Corp.
 
 
 Simple Example
@@ -139,7 +143,7 @@ Additionally, only interpolation type ```"linear"``` is supported for now.
 API Reference
 -------------
 
-TBD
+[http://promotal.jp/ss5player/doc/index.html](http://promotal.jp/ss5player/doc/index.html)
 
 
 Copyrights

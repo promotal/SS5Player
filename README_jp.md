@@ -20,7 +20,11 @@ SS5Player for AS3
 動作サンプル
 -------------
 
-TBD
+下記URLより動作サンプルを確認することができます。
+
+[http://promotal.jp/ss5player/SS5Viewer/SS5Viewer.html](http://promotal.jp/ss5player/SS5Viewer/SS5Viewer.html)
+
+※当サンプルに含まれるアニメーションデータは、株式会社ウェブテクノロジの著作物です。
 
 
 単純な使用例
@@ -134,7 +138,7 @@ SpriteStudio プロジェクトファイルを読み込むには、 ```SS5Projec
 API Reference
 -------------
 
-TBD
+[http://promotal.jp/ss5player/doc/index.html](http://promotal.jp/ss5player/doc/index.html)
 
 
 Copyrights

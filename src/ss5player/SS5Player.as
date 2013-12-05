@@ -10,7 +10,7 @@ package ss5player {
 		/**
 		 * Current version of SS5Player.
 		 */
-		public static const VERSION:String = "0.2.0";
+		public static const VERSION:String = "0.2.1";
 
 		public function SS5Player() {
 			super();
